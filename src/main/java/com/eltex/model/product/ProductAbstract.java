@@ -1,6 +1,5 @@
 package com.eltex.model.product;
 
-import com.eltex.ICrudAction;
 import com.eltex.model.Producer;
 import org.apache.commons.lang3.RandomStringUtils;
 

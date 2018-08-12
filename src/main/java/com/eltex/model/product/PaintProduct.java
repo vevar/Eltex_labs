@@ -9,6 +9,9 @@ public class PaintProduct extends ProductAbstract {
 
     private Color color;
 
+    public PaintProduct() {
+    }
+
     public PaintProduct(Color color) {
         this.color = color;
     }

@@ -1,11 +1,10 @@
-package com.eltex;
+package com.eltex.model.product;
 
 public interface ICrudAction {
 
     void create();
     void delete();
     void update();
-    // TODO Why read?
     void read();
 
 }

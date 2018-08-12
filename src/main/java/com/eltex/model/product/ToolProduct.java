@@ -9,6 +9,9 @@ public class ToolProduct extends ProductAbstract {
 
     private String type;
 
+    public ToolProduct() {
+    }
+
     public ToolProduct(String type) {
         this.type = type;
     }

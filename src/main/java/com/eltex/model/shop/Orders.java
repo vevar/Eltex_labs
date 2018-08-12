@@ -1,6 +1,5 @@
 package com.eltex.model.shop;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -21,7 +20,11 @@ public class Orders<T extends Order> {
     }
 
 
-    public void checkout(T order) {
+    public void checkout(T order) throws NullPointerException{
+        if (order == null){
+            throw new NullPointerException("Oder is null");
+        }
+
         order.setDateCreation(LocalDateTime.now());
 
         orderList.add(order);
@@ -30,28 +33,22 @@ public class Orders<T extends Order> {
     }
 
     public boolean remove(T order) {
+        if (order == null){
+            throw new NullPointerException("Oder is null");
+        }
 
         boolean removeFlag = orderList.remove(order);
         orderMap.remove(order.getDateCreation());
         return removeFlag;
     }
 
-    public void check() {
-        Iterator<T> iterator = orderList.iterator();
-        T order;
 
-        while (iterator.hasNext()) {
-            order = iterator.next();
-
-            if (order.getStatusOrder() == StatusOrder.READY &&
-                    order.getDateCreation().plus(order.getDateWait()).isBefore(LocalDateTime.now())) {
-                iterator.remove();
-            }
-        }
-
-    }
 
     public T getOrder(UUID id) {
+        if (id == null){
+            throw new NullPointerException("Id is null");
+        }
+
         for (T order : orderList) {
             if (order.getId() == id)
                 return order;

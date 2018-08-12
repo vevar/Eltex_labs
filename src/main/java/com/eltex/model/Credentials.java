@@ -1,5 +1,7 @@
 package com.eltex.model;
 
+import com.eltex.model.shop.ShoppingCard;
+
 import java.util.UUID;
 
 public class Credentials {
@@ -7,17 +9,29 @@ public class Credentials {
     private UUID id;
     private String firstName;
     private String secondName;
-    private String grandName;
+    private String middleName;
     private String email;
+    private ShoppingCard shoppingCard;
+
 
     public Credentials() {
+
     }
 
     public Credentials(String firstname, String secondname, String grandname, String email) {
         this.firstName = firstname;
         this.secondName = secondname;
-        this.grandName = grandname;
+        this.middleName = grandname;
         this.email = email;
+    }
+
+    public Credentials(String firstName, String secondName, String middleName, String email,
+                       ShoppingCard shoppingCard) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.middleName = middleName;
+        this.email = email;
+        this.shoppingCard = shoppingCard;
     }
 
     public String getFirstName() {
@@ -36,12 +50,12 @@ public class Credentials {
         this.secondName = secondName;
     }
 
-    public String getGrandName() {
-        return grandName;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setGrandName(String grandName) {
-        this.grandName = grandName;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public String getEmail() {
@@ -50,5 +64,13 @@ public class Credentials {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public ShoppingCard getShoppingCard() {
+        return shoppingCard;
+    }
+
+    public void setShoppingCard(ShoppingCard shoppingCard) {
+        this.shoppingCard = shoppingCard;
     }
 }

@@ -1,12 +1,50 @@
 package com.eltex;
 
 import com.eltex.model.factory.ProductFactory;
+import com.eltex.model.generator.GeneratorOrders;
 import com.eltex.model.product.ProductAbstract;
+import com.eltex.model.shop.Order;
+import com.eltex.model.shop.Orders;
+import com.eltex.service.OrderService;
+
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        GeneratorOrders generator1 = new GeneratorOrders();
+        GeneratorOrders generator2 = new GeneratorOrders();
+        generator1.start();
+        generator2.start();
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                generator1.setWork(false);
+                generator2.setWork(false);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                List<Order> orders = OrderService.getAll();
+                synchronized (Order.class) {
+                    for (Order order : orders) {
+                        for (Object product : order.getShoppingCard().getListProduct()) {
+                            ((ProductAbstract) product).read();
+                        }
+                    }
+                }
+            }
+        }, 5000);
+
+
+    }
+
+    private void lab1(String[] args) {
         if (args.length == 2) {
             int amountObj = new Integer(args[0]);
 
@@ -40,7 +78,5 @@ public class Main {
         } else {
             System.out.println("Error");
         }
-
-
     }
 }

@@ -13,11 +13,14 @@ public class ShoppingCard <T extends ProductAbstract> implements ShoppingCardInt
     public ShoppingCard() {
         listProduct = new ArrayList<>();
         uuidSet = new TreeSet<>();
-
     }
 
     @Override
-    public void add(T product) {
+    public void add(T product) throws NullPointerException{
+        if (product == null){
+            throw new NullPointerException("Product is null");
+        }
+
         while (uuidSet.contains(product.getId())) {
             product.setId(UUID.randomUUID());
         }

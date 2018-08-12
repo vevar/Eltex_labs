@@ -1,11 +1,9 @@
 package com.eltex.model.shop;
 
-import com.eltex.model.User;
+import com.eltex.model.Credentials;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.UUID;
 
 public class Order {
@@ -15,7 +13,7 @@ public class Order {
     private StatusOrder statusOrder;
     private LocalDateTime dateCreation;
     private Duration dateWait;
-    private User user;
+    private Credentials user;
 
 
     private Order() {
@@ -27,7 +25,7 @@ public class Order {
         this.shoppingCard = shoppingCard;
     }
 
-    public Order(ShoppingCard shoppingCard, User user) {
+    public Order(ShoppingCard shoppingCard, Credentials user) {
         this();
         this.shoppingCard = shoppingCard;
         this.user = user;
@@ -72,11 +70,11 @@ public class Order {
     }
 
 
-    public User getUser() {
+    public Credentials getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Credentials user) {
         this.user = user;
     }
 

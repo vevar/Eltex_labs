@@ -8,6 +8,9 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 
+/**
+ * Class for check orders, that waiting.
+ */
 public class CheckWait extends ACheck {
 
     private Orders orders;
@@ -18,6 +21,10 @@ public class CheckWait extends ACheck {
         this.orders = orders;
     }
 
+    /**
+     * If order has status equal "wait" and time of wait is lose,
+     * than this method set status of order as "ready".
+     */
     @Override
     void check() {
         Iterator iterator = orders.getListOrders().iterator();

@@ -17,29 +17,30 @@ public class Main {
 
         GeneratorOrders generator1 = new GeneratorOrders();
         GeneratorOrders generator2 = new GeneratorOrders();
-        generator1.start();
-        generator2.start();
+        generator1.on();
+        generator2.on();
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
-            public void run() {
-                generator1.setWork(false);
-                generator2.setWork(false);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            public  void run() {
+                generator1.setLock(true);
+                generator2.setLock(true);
                 List<Order> orders = OrderService.getAll();
-                synchronized (Order.class) {
+                synchronized (OrderService.getAll()) {
+                    System.out.println(orders.size());
                     for (Order order : orders) {
                         for (Object product : order.getShoppingCard().getListProduct()) {
                             ((ProductAbstract) product).read();
+                            System.out.println();
+
                         }
                     }
+
                 }
+                generator1.off();
+                generator2.off();
             }
-        }, 5000);
+        }, 1000);
 
 
     }

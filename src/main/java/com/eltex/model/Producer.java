@@ -1,5 +1,9 @@
 package com.eltex.model;
 
+
+/***
+ * Model of producer
+ */
 public class Producer {
 
     private int id;

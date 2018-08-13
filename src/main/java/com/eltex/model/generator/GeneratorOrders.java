@@ -9,53 +9,104 @@ import com.eltex.service.OrderService;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class GeneratorOrders extends Thread {
 
+/**
+ * Class for generation orders. It run like demon {@link Thread}
+ * <p>
+ * For manage of generation use {@link #on()} and {@link #off}
+ *
+ * @author alxminyaev
+ * @see Runnable
+ * @see Thread
+ */
+public class GeneratorOrders implements Runnable {
+
+    private Thread thread;
     private static final int GENERATION_INTERVAL = 100;
     private boolean fWork;
     private boolean lock;
     private Duration timeBetweenGeneration;
     private LocalDateTime lastTime;
 
+
+    public GeneratorOrders() {
+        thread = new Thread(this);
+        thread.setDaemon(true);
+        timeBetweenGeneration = Duration.ofNanos(GENERATION_INTERVAL);
+        lastTime = LocalDateTime.now();
+    }
+
+    /**
+     * @return boolean value if {@link GeneratorOrders} running return <i>true</i> else return false
+     */
     public boolean isWork() {
         return fWork;
     }
 
-    public void setWork(boolean fWork) {
-        this.fWork = fWork;
+    /**
+     * Method run this generator
+     */
+    public synchronized void on() {
+        fWork = true;
+        thread.start();
     }
 
+    /**
+     * Method stop this generator
+     */
+    public synchronized void off() {
+        fWork = false;
+        notify();
+    }
+
+    /**
+     * @return <i>true</i> if generator wait, else <i>false</i>
+     */
     public boolean isLock() {
         return lock;
     }
 
-    public void setLock(boolean lock) {
+    /**
+     * Set lock of generator
+     *
+     * @param lock <i>true</i> if generator wait, else <i>false</i>
+     */
+    public synchronized void setLock(boolean lock) {
         this.lock = lock;
+
+        if (!this.lock) {
+            notify();
+        }
     }
 
+    /**
+     * Interval of time between generation
+     *
+     * @return Time between generation
+     */
     public Duration getTimeBetweenGeneration() {
         return timeBetweenGeneration;
     }
 
+    /**
+     * Set time between generation
+     *
+     * @param timeBetweenGeneration Interval of time between generation
+     */
     public void setTimeBetweenGeneration(Duration timeBetweenGeneration) {
         this.timeBetweenGeneration = timeBetweenGeneration;
     }
 
-    public LocalDateTime getLastTime() {
-        return lastTime;
-    }
-
+    /**
+     * Main method for thread work like loop at Thread
+     * @throws InterruptedException
+     */
     private void loop() throws InterruptedException {
-        if (timeBetweenGeneration == null) {
-            timeBetweenGeneration = Duration.ofNanos(GENERATION_INTERVAL);
-        }
-        if (lastTime == null){
-            lastTime = LocalDateTime.now();
-        }
-
         while (fWork) {
             while (lock) {
-                wait();
+                synchronized (this) {
+                    wait();
+                }
             }
 
             if (isTimeGeneration()) {
@@ -65,10 +116,16 @@ public class GeneratorOrders extends Thread {
         }
     }
 
+    /**
+     * Check time of generation
+     */
     private boolean isTimeGeneration() {
         return lastTime.plus(timeBetweenGeneration).isBefore(LocalDateTime.now());
     }
 
+    /**
+     * Method that generate product
+     */
     private synchronized void generate() {
         int amountProduct = (int) (Math.random() * 10) + 1;
         ShoppingCard shoppingCard = new ShoppingCard();

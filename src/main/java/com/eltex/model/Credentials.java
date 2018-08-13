@@ -1,9 +1,14 @@
 package com.eltex.model;
 
+import com.eltex.model.shop.Order;
+import com.eltex.model.shop.Orders;
 import com.eltex.model.shop.ShoppingCard;
 
 import java.util.UUID;
 
+/**
+ * Client of shop
+ */
 public class Credentials {
 
     private UUID id;
@@ -12,26 +17,18 @@ public class Credentials {
     private String middleName;
     private String email;
     private ShoppingCard shoppingCard;
-
+    private Orders<Order> orders;
 
     public Credentials() {
 
     }
 
-    public Credentials(String firstname, String secondname, String grandname, String email) {
-        this.firstName = firstname;
-        this.secondName = secondname;
-        this.middleName = grandname;
-        this.email = email;
+    public UUID getId() {
+        return id;
     }
 
-    public Credentials(String firstName, String secondName, String middleName, String email,
-                       ShoppingCard shoppingCard) {
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.middleName = middleName;
-        this.email = email;
-        this.shoppingCard = shoppingCard;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -72,5 +69,13 @@ public class Credentials {
 
     public void setShoppingCard(ShoppingCard shoppingCard) {
         this.shoppingCard = shoppingCard;
+    }
+
+    public Orders<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Orders orders) {
+        this.orders = orders;
     }
 }

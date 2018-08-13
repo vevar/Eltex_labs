@@ -48,7 +48,7 @@ public class ToolProduct extends ProductAbstract {
     public void create() {
         super.create();
 
-        type = RandomStringUtils.random(5);
+        type = RandomStringUtils.random(5,true, false);
     }
 
     @Override

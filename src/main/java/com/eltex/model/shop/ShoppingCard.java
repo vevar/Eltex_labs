@@ -4,6 +4,14 @@ import com.eltex.model.product.ProductAbstract;
 
 import java.util.*;
 
+/**
+ * Shopping card (basket)
+ * @param <T>
+ *
+ * @author alxminyaev
+ * @see ProductAbstract
+ * @see ShoppingCardInterface
+ */
 public class ShoppingCard <T extends ProductAbstract> implements ShoppingCardInterface<T> {
 
     private List<T> listProduct;
@@ -15,6 +23,11 @@ public class ShoppingCard <T extends ProductAbstract> implements ShoppingCardInt
         uuidSet = new TreeSet<>();
     }
 
+    /**
+     * Add product to shopping card
+     * @param product
+     * @throws NullPointerException
+     */
     @Override
     public void add(T product) throws NullPointerException{
         if (product == null){
@@ -30,11 +43,18 @@ public class ShoppingCard <T extends ProductAbstract> implements ShoppingCardInt
 
     }
 
+    /**
+     * Delete product form shopping card
+     * @param product
+     */
     @Override
     public void delete(T product) {
         listProduct.remove(product);
     }
 
+    /**
+     * @return Get list of product
+     */
     @Override
     public List<T> getListProduct() {
         return listProduct;

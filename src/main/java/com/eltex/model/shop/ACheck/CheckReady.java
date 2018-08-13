@@ -5,9 +5,14 @@ import com.eltex.model.shop.Orders;
 import com.eltex.model.shop.StatusOrder;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.Iterator;
 
+/**
+ * Class for check ready orders
+ *
+ * @author alxminyaev
+ * @see ACheck
+ */
 public class CheckReady extends ACheck {
 
     private Orders orders;
@@ -25,6 +30,9 @@ public class CheckReady extends ACheck {
         this.orders = orders;
     }
 
+    /**
+     * If order has status "ready", than it method remove order.
+     */
     @Override
     void check() {
         Iterator iterator = orders.getListOrders().iterator();

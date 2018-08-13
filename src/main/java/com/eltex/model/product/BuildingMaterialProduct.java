@@ -62,7 +62,7 @@ public class BuildingMaterialProduct extends ProductAbstract {
     @Override
     public void create() {
         super.create();
-        type = RandomStringUtils.random(5);
+        type = RandomStringUtils.random(5,true, false);
         weight = Math.random() * 100;
     }
 

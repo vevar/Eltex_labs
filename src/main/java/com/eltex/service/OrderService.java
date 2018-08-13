@@ -6,6 +6,11 @@ import com.eltex.model.shop.Order;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Service for orders
+ * @author alxminyaev
+ * @see OrderSingleton
+ */
 public class OrderService {
 
     public  static void add(Order order){
@@ -16,8 +21,8 @@ public class OrderService {
         OrderSingleton.getInstance().remove(order);
     }
 
-    public static void getOrder(UUID id){
-        OrderSingleton.getInstance().getOrder(id);
+    public static Order getOrder(UUID id){
+        return OrderSingleton.getInstance().getOrder(id);
     }
 
     public static List getAll(){

@@ -1,5 +1,11 @@
 package com.eltex.model.product;
 
+
+/**
+ * Vendor code for product
+ *
+ * @author alxminyaev
+ */
 public class VendorCode {
 
     private String venCode;

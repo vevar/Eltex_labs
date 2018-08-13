@@ -3,11 +3,22 @@ package com.eltex.model.product;
 import com.eltex.model.Producer;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import java.util.UUID;
 
-public abstract class ProductAbstract implements ICrudAction {
 
+/**
+ * Abstract class for products
+ *
+ * @author alxminyaev
+ * @see ICrudAction
+ * @see Serializable
+ */
+public abstract class ProductAbstract implements ICrudAction, Serializable {
+    /**
+     * Counter of products
+     */
     private static int counter;
 
     private UUID id;
@@ -85,8 +96,8 @@ public abstract class ProductAbstract implements ICrudAction {
     }
 
     public void create() {
-        name = RandomStringUtils.random(10);
-        vendorCode = new VendorCode(RandomStringUtils.random(5));
+        name = RandomStringUtils.random(10,true, false);
+        vendorCode = new VendorCode(RandomStringUtils.random(5,true, false));
         cost = (int) (Math.random() * 10000) + 100;
         producer = new Producer(RandomStringUtils.random(10, true, false));
 

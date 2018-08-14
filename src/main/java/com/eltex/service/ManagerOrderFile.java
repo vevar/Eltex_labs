@@ -1,6 +1,9 @@
 package com.eltex.service;
 
+import com.eltex.model.shop.Order;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -8,30 +11,30 @@ import java.util.UUID;
  * Class for implementation IO orders to file
  * @author alxminyaev
  * @see AManageOrder
- * @see com.eltex.model.shop.IOrder
+ * @see IOrder
  */
 public class ManagerOrderFile extends AManageOrder {
 
     private final static String type = "File";
-    private final static String path = "files/file";
+    private final static String path = "objects/file";
 
     @Override
-    public static void readById(UUID id) {
+    public Order readById(UUID id) {
+        return null;
+    }
+
+    @Override
+    public void saveById(UUID id) throws IOException {
 
     }
 
     @Override
-    public static void saveById(UUID id) throws IOException {
-
+    public List<Order> readAll() {
+        return null;
     }
 
     @Override
-    public static void readAll() {
-
-    }
-
-    @Override
-    public static void saveAll() throws IOException {
+    public void saveAll(){
 
     }
 }

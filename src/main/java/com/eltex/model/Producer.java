@@ -1,10 +1,12 @@
 package com.eltex.model;
 
 
+import java.io.Serializable;
+
 /***
  * Model of producer
  */
-public class Producer {
+public class Producer implements Serializable {
 
     private int id;
     private String name;

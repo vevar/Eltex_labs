@@ -4,7 +4,6 @@ import com.eltex.model.factory.ProductFactory;
 import com.eltex.model.generator.GeneratorOrders;
 import com.eltex.model.product.ProductAbstract;
 import com.eltex.model.shop.Order;
-import com.eltex.model.shop.Orders;
 import com.eltex.service.OrderService;
 
 import java.util.List;
@@ -22,12 +21,11 @@ public class Main {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
-            public  void run() {
+            public void run() {
                 generator1.setLock(true);
                 generator2.setLock(true);
                 List<Order> orders = OrderService.getAll();
                 synchronized (OrderService.getAll()) {
-                    System.out.println(orders.size());
                     for (Order order : orders) {
                         for (Object product : order.getShoppingCard().getListProduct()) {
                             ((ProductAbstract) product).read();
@@ -35,10 +33,11 @@ public class Main {
 
                         }
                     }
-
                 }
                 generator1.off();
                 generator2.off();
+                System.out.println(orders.size());
+//                new ManagerOrderJSON().saveAll();
             }
         }, 1000);
 

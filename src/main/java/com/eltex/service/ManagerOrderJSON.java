@@ -39,23 +39,24 @@ public class ManagerOrderJSON extends AManageOrder {
         if (files != null) {
             for (File file : files) {
                 nameFile = file.getName();
-                if (nameFile.matches(tmpNameFile + id.toString() + type)){
+                if (nameFile.matches(tmpNameFile + id.toString() + type)) {
                     try {
                         order = mapper.readValue(nameFile, Order.class);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    break;
                 }
             }
         }
 
-            return order;
+        return order;
     }
 
     /**
      * Save order by id to json file
      *
-     * @param id UUUID id of order
+     * @param id UUID id of order
      */
     @Override
     public void saveById(UUID id) {

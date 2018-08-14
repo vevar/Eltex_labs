@@ -1,9 +1,11 @@
 package com.eltex;
 
+import com.eltex.model.OrderSingleton;
 import com.eltex.model.factory.ProductFactory;
 import com.eltex.model.generator.GeneratorOrders;
 import com.eltex.model.product.ProductAbstract;
 import com.eltex.model.shop.Order;
+import com.eltex.service.ManagerOrderFile;
 import com.eltex.service.OrderService;
 
 import java.util.List;
@@ -37,7 +39,8 @@ public class Main {
                 generator1.off();
                 generator2.off();
                 System.out.println(orders.size());
-//                new ManagerOrderJSON().saveAll();
+                Order order = OrderSingleton.getInstance().getListOrders().get(0);
+                new ManagerOrderFile().saveById(order.getId());
             }
         }, 1000);
 

@@ -8,24 +8,46 @@ import java.util.UUID;
 
 /**
  * Service for orders
+ *
  * @author alxminyaev
  * @see OrderSingleton
  */
 public class OrderService {
 
-    public  static void add(Order order){
+    /**
+     * It adds order to data
+     *
+     * @param order order
+     */
+    public static void add(Order order) {
         OrderSingleton.getInstance().checkout(order);
     }
 
-    public static void remove(Order order){
+    /**
+     * It removes order from data
+     *
+     * @param order order
+     */
+    public static void remove(Order order) {
         OrderSingleton.getInstance().remove(order);
     }
 
-    public static Order getOrder(UUID id){
+    /**
+     * Get order from data
+     *
+     * @param id UUID id of order
+     * @return order
+     */
+    public static Order getOrder(UUID id) {
         return OrderSingleton.getInstance().getOrder(id);
     }
 
-    public static List getAll(){
+    /**
+     * Get list of orders from data
+     *
+     * @return list of orders
+     */
+    public static List<Order> getAll() {
         return OrderSingleton.getInstance().getListOrders();
     }
 }

@@ -8,5 +8,4 @@ package com.eltex.service;
 abstract class AManageOrder implements IOrder {
 
 
-
 }

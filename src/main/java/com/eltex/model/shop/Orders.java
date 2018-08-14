@@ -24,8 +24,8 @@ public class Orders<T extends Order> {
     }
 
     /**
-     * @param orderList
-     * @param orderMap
+     * @param orderList list of orders
+     * @param orderMap map with orders
      */
     public Orders(List<T> orderList, Map<LocalDateTime, T> orderMap) {
         this.orderList = orderList;
@@ -36,7 +36,7 @@ public class Orders<T extends Order> {
      * Add order to collection
      *
      * @param order order
-     * @throws NullPointerException
+     * @throws NullPointerException Will throw an error if the argument is null.
      */
     public synchronized void checkout(T order) throws NullPointerException {
         if (order == null) {
@@ -71,7 +71,7 @@ public class Orders<T extends Order> {
      * Get order by id
      *
      * @param id id
-     * @return
+     * @return order
      * @see UUID
      */
     public T getOrder(UUID id) {
@@ -90,7 +90,7 @@ public class Orders<T extends Order> {
     /**
      * @return Get list of orders
      */
-    public List getListOrders() {
+    public List<T> getListOrders() {
         return orderList;
     }
 
@@ -104,7 +104,7 @@ public class Orders<T extends Order> {
     /**
      * Set map of order
      *
-     * @param orderMap
+     * @param orderMap Map with key: {@link LocalDateTime} and value: {@link T}
      */
     public void setOrderMap(Map<LocalDateTime, T> orderMap) {
         this.orderMap = orderMap;
